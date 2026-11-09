@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix StreetBites - Street Food Vendor Community Platform",
+  "description": "A social blogging and discussion platform connecting street food vendors, shop owners, and entrepreneurs to share daily challenges, ingredient prices, shop directory listings, AI business advice, and community solutions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

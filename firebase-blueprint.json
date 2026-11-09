@@ -1,0 +1,138 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "Registered vendor or member profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 50 },
+        "email": { "type": "string", "format": "email" },
+        "avatar": { "type": "string" },
+        "role": { "type": "string", "enum": ["Vendor", "Member", "Moderator", "Admin"] },
+        "isVerifiedVendor": { "type": "boolean" },
+        "bio": { "type": "string", "maxLength": 500 },
+        "location": { "type": "string", "maxLength": 100 },
+        "shopName": { "type": "string", "maxLength": 100 },
+        "businessCategory": { "type": "string" },
+        "totalPosts": { "type": "integer" },
+        "followersCount": { "type": "integer" },
+        "followingCount": { "type": "integer" },
+        "joinedDate": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "post": {
+      "title": "Post",
+      "description": "Community discussion or challenge post",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "authorUsername": { "type": "string" },
+        "authorAvatar": { "type": "string" },
+        "authorRole": { "type": "string" },
+        "isVerifiedVendor": { "type": "boolean" },
+        "isAnonymous": { "type": "boolean" },
+        "title": { "type": "string", "maxLength": 200 },
+        "content": { "type": "string", "maxLength": 5000 },
+        "category": { "type": "string" },
+        "location": { "type": "string" },
+        "tags": { "type": "array" },
+        "timestamp": { "type": "string" },
+        "likesCount": { "type": "integer" },
+        "commentsCount": { "type": "integer" },
+        "viewCount": { "type": "integer" },
+        "isPinned": { "type": "boolean" }
+      },
+      "required": ["id", "authorId", "title", "content", "category"]
+    },
+    "comment": {
+      "title": "Comment",
+      "description": "Discussion reply or comment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "postId": { "type": "string" },
+        "authorId": { "type": "string" },
+        "authorName": { "type": "string" },
+        "content": { "type": "string", "maxLength": 1000 },
+        "timestamp": { "type": "string" },
+        "likesCount": { "type": "integer" }
+      },
+      "required": ["id", "postId", "authorId", "content"]
+    },
+    "shop": {
+      "title": "Shop",
+      "description": "Street food vendor shop listing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "ownerId": { "type": "string" },
+        "description": { "type": "string", "maxLength": 1000 },
+        "location": { "type": "string" },
+        "category": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewsCount": { "type": "integer" }
+      },
+      "required": ["id", "name", "ownerId", "location", "category"]
+    },
+    "priceReport": {
+      "title": "PriceReport",
+      "description": "Ingredient market price report",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "item": { "type": "string" },
+        "price": { "type": "number" },
+        "unit": { "type": "string" },
+        "city": { "type": "string" },
+        "vendorId": { "type": "string" }
+      },
+      "required": ["id", "item", "price", "city"]
+    },
+    "notification": {
+      "title": "Notification",
+      "description": "User notification item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "userId", "title"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/user" },
+      "description": "User profiles"
+    },
+    "/posts/{postId}": {
+      "schema": { "$ref": "#/entities/post" },
+      "description": "Community posts"
+    },
+    "/comments/{commentId}": {
+      "schema": { "$ref": "#/entities/comment" },
+      "description": "Post comments"
+    },
+    "/shops/{shopId}": {
+      "schema": { "$ref": "#/entities/shop" },
+      "description": "Shop directory listings"
+    },
+    "/priceReports/{reportId}": {
+      "schema": { "$ref": "#/entities/priceReport" },
+      "description": "Ingredient price reports"
+    },
+    "/notifications/{notifId}": {
+      "schema": { "$ref": "#/entities/notification" },
+      "description": "User notifications"
+    }
+  }
+}

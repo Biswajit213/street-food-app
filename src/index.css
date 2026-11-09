@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --color-brand-orange: #FF6B35;
+  --color-brand-charcoal: #202124;
+  --color-brand-yellow: #FFC857;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
